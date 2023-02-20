@@ -7,7 +7,7 @@ const Footer = (props) => {
   return (
     <Fragment>
       <div className="flex justify-center">
-        <div className="flex justify-center text-darkGrayishBlue font-semibold space-x-4 p-4 w-[85%] bg-white rounded-md mt-5 md:w-1/2 lg:w-[40%]">
+        <div className="flex justify-center text-darkGrayishBlue font-semibold space-x-4 p-4 w-[85%] bg-white dark:bg-veryDarkDesaturatedBlue rounded-md mt-5 md:w-1/2 lg:w-[40%]">
           <button
             onClick={() => handleFilterClick("all")}
             className=" hover:text-brightBlue duration-200"
@@ -32,7 +32,7 @@ const Footer = (props) => {
         Drag and drop to reorder list
       </div>
 
-      <p className="text-[10px] text-center">
+      <p className="text-[10px] text-center text-veryLightGrayishBlue">
         Challenge by
         <a
           className="ml-1  text-purple-500 underline"

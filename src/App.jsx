@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 import Header from "./components/Header";
 import Input from "./components/Input";
@@ -8,6 +8,27 @@ import Footer from "./components/Footer";
 const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [theme, setTheme] = useState(null);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const handleThemeSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   const addTodoHandler = (todoItem) => {
     setTodoList((prevTodoList) => {
@@ -39,7 +60,7 @@ const App = () => {
 
   return (
     <Fragment>
-      <Header />
+      <Header theme={theme} onToggleTheme={handleThemeSwitch} />
       <Input onAddTodo={addTodoHandler} />
       <List
         todos={filteredTodos}

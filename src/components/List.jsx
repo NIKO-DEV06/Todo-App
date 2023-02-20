@@ -9,10 +9,10 @@ const List = (props) => {
 
   return (
     <div className="flex justify-center">
-      <ul className="w-[85%] bg-white rounded-md mt-3 md:w-1/2 lg:w-[40%]">
+      <ul className="w-[85%] bg-white dark:bg-veryDarkDesaturatedBlue rounded-md mt-3 md:w-1/2 lg:w-[40%] ">
         <div>
           {props.todos.length === 0 ? (
-            <div className=" text-center p-3 border-b-2 text-lg text-veryDarkGrayishBlue">
+            <div className=" text-center p-3 border-b-2 dark:border-veryDarkGrayishBlue text-lg text-veryDarkGrayishBlue dark:bg-veryDarkDesaturatedBlue dark:text-veryLightGrayishBlue rounded-t-md">
               There are no todos.🧍
             </div>
           ) : (
@@ -37,7 +37,7 @@ const List = (props) => {
         </div>
 
         <div>
-          <li className="p-4 w-full flex justify-between">
+          <li className="p-4 w-full flex justify-between ">
             <span className="ml-4 text-darkGrayishBlue font-semibold">
               {props.todos.filter((todo) => !todo.completed).length} items left
             </span>
@@ -47,7 +47,7 @@ const List = (props) => {
                 const filtered = newTodos.filter((t) => !t.completed);
                 props.newTodos(filtered);
               }}
-              className="text-darkGrayishBlue font-semibold hover:text-veryDarkGrayishBlue duration-200"
+              className="text-darkGrayishBlue font-semibold hover:text-veryDarkGrayishBlue duration-200 dark:hover:text-veryLightGrayishBlue"
             >
               Clear Completed
             </button>

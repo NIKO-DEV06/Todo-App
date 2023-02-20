@@ -23,7 +23,7 @@ const Input = (props) => {
         <input
           type="text"
           placeholder="Create a new text..."
-          className=" w-[85%] pl-7 p-3 rounded-md outline-none md:w-1/2 lg:w-[40%] mb-3"
+          className=" w-[85%] dark:bg-veryDarkDesaturatedBlue pl-7 p-3 rounded-md outline-none md:w-1/2 lg:w-[40%] mb-3 dark:text-veryLightGrayishBlue"
           autoComplete="off"
           id="todo"
           value={enteredTodo}
