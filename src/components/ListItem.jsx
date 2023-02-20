@@ -6,6 +6,8 @@ const ListItem = (props) => {
   return (
     <li className="p-4 border-b-2 border-veryLightGrayishBlue w-full flex ">
       <input
+        checked={props.completed}
+        onChange={props.onCheck}
         type="checkbox"
         className="appearance-none bg-white border-[1.5px] border-veryLightGrayishBlue h-6 w-6 rounded-full cursor-pointer my-auto checked:border-none  checked:bg-gradient-to-b from-from to-to peer relative after:content-[''] after:w-full after:h-full after:absolute after:left-0 after:top-0 after:bg-no-repeat after:bg-center after:bg-[length:12px] after:bg-[url('.././src/assets/icon-check.svg')] after:opacity-0 after:checked:opacity-100"
       />

@@ -22,25 +22,31 @@ const App = () => {
     });
   };
 
-  // console.log(todoList[0].completed);
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+  };
 
-  // const handleFilterChange = (newFilter) => {
-  //   setFilter(newFilter);
-  // };
-  // const filteredTodos =
-  //   filter === "all"
-  //     ? todoList
-  //     : filter === "active"
-  //     ? todoList.filter((todo) => !todo.completed)
-  //     : todoList.filter((todo) => todo.completed);
+  const clearCompletedHandler = () => {
+    setTodoList(todoList.filter((todo) => !todo.completed));
+  };
+
+  const filteredTodos =
+    filter === "all"
+      ? todoList
+      : filter === "active"
+      ? todoList.filter((todo) => !todo.completed)
+      : todoList.filter((todo) => todo.completed);
 
   return (
     <Fragment>
       <Header />
       <Input onAddTodo={addTodoHandler} />
-      <List todos={todoList} newTodos={setTodoList} />
-
-      <Footer />
+      <List
+        todos={filteredTodos}
+        newTodos={setTodoList}
+        onClearCompleted={clearCompletedHandler}
+      />
+      <Footer onFilterChange={handleFilterChange} />
     </Fragment>
   );
 };

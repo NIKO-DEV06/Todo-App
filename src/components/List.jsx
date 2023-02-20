@@ -3,19 +3,9 @@ import React, { useState } from "react";
 import ListItem from "./ListItem";
 
 const List = (props) => {
-  const [completed, setCompleted] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setCompleted(!completed);
-  };
-
   const deleteTodoHandler = (id) => {
     props.newTodos(props.todos.filter((todo) => todo.id !== id));
   };
-
-  //   console.log(props.todos.map((todo) => todo.completed));
-
-  //   console.log(props.todos);
 
   return (
     <div className="flex justify-center">
@@ -30,12 +20,15 @@ const List = (props) => {
           )}
           {props.todos.map((todo) => (
             <ListItem
-              completed={completed}
-              onCheck={handleCheckboxChange}
-              todos={props.todos}
-              newTodos={props.newTodos}
               key={todo.id}
+              completed={todo.completed}
               todoItem={todo.todo}
+              onCheck={() => {
+                const newTodos = [...props.todos];
+                const index = newTodos.findIndex((t) => t.id === todo.id);
+                newTodos[index].completed = !newTodos[index].completed;
+                props.newTodos(newTodos);
+              }}
               onDeleteTodo={() => {
                 deleteTodoHandler(todo.id);
               }}
@@ -46,9 +39,16 @@ const List = (props) => {
         <div>
           <li className="p-4 w-full flex justify-between">
             <span className="ml-4 text-darkGrayishBlue font-semibold">
-              {props.todos.length} items left
+              {props.todos.filter((todo) => !todo.completed).length} items left
             </span>
-            <button className="text-darkGrayishBlue font-semibold hover:text-veryDarkGrayishBlue duration-200">
+            <button
+              onClick={() => {
+                const newTodos = [...props.todos];
+                const filtered = newTodos.filter((t) => !t.completed);
+                props.newTodos(filtered);
+              }}
+              className="text-darkGrayishBlue font-semibold hover:text-veryDarkGrayishBlue duration-200"
+            >
               Clear Completed
             </button>
           </li>
