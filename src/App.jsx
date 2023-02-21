@@ -17,18 +17,15 @@ const getLocalTodos = () => {
 const App = () => {
   const [todoList, setTodoList] = useState(getLocalTodos());
   const [filter, setFilter] = useState("all");
-  const [theme, setTheme] = useState(null);
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     localStorage.setItem("todoArray", JSON.stringify(todoList));
   }, [todoList]);
-
-  // useEffect(() => {
-  //   const storedArray = localStorage.getItem("todoArray");
-  //   if (storedArray) {
-  //     setTodoList(JSON.parse(storedArray));
-  //   }
-  // }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -45,6 +42,13 @@ const App = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
+    }
+  }, []);
 
   const handleThemeSwitch = () => {
     setTheme(theme === "dark" ? "light" : "dark");
