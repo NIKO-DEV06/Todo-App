@@ -32,7 +32,7 @@ const Footer = (props) => {
         Drag and drop to reorder list
       </div>
 
-      <p className="text-[10px] text-center text-veryLightGrayishBlue">
+      <p className="text-[10px] text-center dark:text-veryLightGrayishBlue">
         Challenge by
         <a
           className="ml-1  text-purple-500 underline"
