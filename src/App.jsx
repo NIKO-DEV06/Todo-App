@@ -5,10 +5,30 @@ import Input from "./components/Input";
 import List from "./components/List";
 import Footer from "./components/Footer";
 
+const getLocalTodos = () => {
+  let list = localStorage.getItem("todoArray");
+  if (list) {
+    return JSON.parse(localStorage.getItem("todoArray"));
+  } else {
+    return [];
+  }
+};
+
 const App = () => {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(getLocalTodos());
   const [filter, setFilter] = useState("all");
   const [theme, setTheme] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem("todoArray", JSON.stringify(todoList));
+  }, [todoList]);
+
+  // useEffect(() => {
+  //   const storedArray = localStorage.getItem("todoArray");
+  //   if (storedArray) {
+  //     setTodoList(JSON.parse(storedArray));
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
