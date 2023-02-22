@@ -8,15 +8,16 @@ const getLocalTodos = () => {
   if (storedTodos) {
     return JSON.parse(localStorage.getItem("todos"));
   } else {
-    return props.todos;
+    return [props.todos];
   }
 };
+
 const List = (props) => {
-  const [todoDrag, updateTodoDrag] = useState(getLocalTodos());
+  const [todoDrag, updateTodoDrag] = useState(props.todos);
 
   useEffect(() => {
-    updateTodoDrag(todoDrag);
-  }, [todoDrag]);
+    updateTodoDrag(props.todos);
+  }, [props.todos]);
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
@@ -28,7 +29,7 @@ const List = (props) => {
     updateTodoDrag(items);
 
     // Save the updated state to localStorage
-    localStorage.setItem("todos", JSON.stringify(items));
+    // localStorage.setItem("todos", JSON.stringify(items));
   };
 
   const deleteTodoHandler = (id) => {
