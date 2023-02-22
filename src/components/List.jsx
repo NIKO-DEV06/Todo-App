@@ -3,41 +3,13 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import ListItem from "./ListItem";
 
-const getLocalTodos = () => {
-  let storedTodos = localStorage.getItem("todos");
-  if (storedTodos) {
-    return JSON.parse(localStorage.getItem("todos"));
-  } else {
-    return [props.todos];
-  }
-};
-
 const List = (props) => {
-  const [todoDrag, updateTodoDrag] = useState(props.todos);
-
-  useEffect(() => {
-    updateTodoDrag(props.todos);
-  }, [props.todos]);
-
-  const handleOnDragEnd = (result) => {
-    if (!result.destination) return;
-
-    const items = Array.from(todoDrag);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-
-    updateTodoDrag(items);
-
-    // Save the updated state to localStorage
-    // localStorage.setItem("todos", JSON.stringify(items));
-  };
-
   const deleteTodoHandler = (id) => {
     props.newTodos(props.todos.filter((todo) => todo.id !== id));
   };
   return (
     <div className="flex justify-center">
-      <DragDropContext onDragEnd={handleOnDragEnd}>
+      <DragDropContext onDragEnd={props.handleOnDragEnd}>
         <Droppable droppableId="todos">
           {(provided) => {
             return (
@@ -51,7 +23,7 @@ const List = (props) => {
                     There are no todos.🧍
                   </div>
                 ) : null}
-                {todoDrag.map((todo, index) => {
+                {props.todos.map((todo, index) => {
                   return (
                     <ListItem
                       key={todo.id}

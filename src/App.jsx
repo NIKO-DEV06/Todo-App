@@ -66,6 +66,15 @@ const App = () => {
       ];
     });
   };
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+
+    const items = Array.from(todoList);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setTodoList(items);
+  };
 
   const handleFilterChange = (newFilter) => {
     setFilter(newFilter);
@@ -87,6 +96,7 @@ const App = () => {
       <Header theme={theme} onToggleTheme={handleThemeSwitch} />
       <Input onAddTodo={addTodoHandler} />
       <List
+        handleOnDragEnd={handleOnDragEnd}
         todos={filteredTodos}
         newTodos={setTodoList}
         onClearCompleted={clearCompletedHandler}
