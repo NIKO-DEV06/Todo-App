@@ -16,7 +16,7 @@ const Footer = (props) => {
           </button>
           <button
             onClick={() => handleFilterClick("active")}
-            className=" hover:text-brightBlue duration-200"
+            className="hover:text-brightBlue duration-200"
           >
             Active
           </button>

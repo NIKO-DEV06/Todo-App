@@ -3,12 +3,20 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import ListItem from "./ListItem";
 
+const getLocalTodos = () => {
+  let storedTodos = localStorage.getItem("todos");
+  if (storedTodos) {
+    return JSON.parse(localStorage.getItem("todos"));
+  } else {
+    return props.todos;
+  }
+};
 const List = (props) => {
-  const [todoDrag, updateTodoDrag] = useState(props.todos);
+  const [todoDrag, updateTodoDrag] = useState(getLocalTodos());
 
   useEffect(() => {
-    updateTodoDrag(props.todos);
-  }, [props.todos]);
+    updateTodoDrag(todoDrag);
+  }, [todoDrag]);
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
@@ -18,6 +26,9 @@ const List = (props) => {
     items.splice(result.destination.index, 0, reorderedItem);
 
     updateTodoDrag(items);
+
+    // Save the updated state to localStorage
+    localStorage.setItem("todos", JSON.stringify(items));
   };
 
   const deleteTodoHandler = (id) => {
