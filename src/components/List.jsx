@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import ListItem from "./ListItem";
 
 const List = (props) => {
   const [todoDrag, updateTodoDrag] = useState(props.todos);
+
+  useEffect(() => {
+    updateTodoDrag(props.todos);
+  }, [props.todos]);
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return;
