@@ -11,7 +11,7 @@ const ListItem = (props) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="p-4 border-b-2 rounded-t-md border-veryLightGrayishBlue dark:border-veryDarkGrayishBlue w-full flex dark:bg-veryDarkDesaturatedBlue"
+          className="p-4 border-b-[1.5px] rounded-t-md border-veryLightGrayishBlue dark:border-veryDarkGrayishBlue w-full flex dark:bg-veryDarkDesaturatedBlue"
         >
           <input
             checked={props.completed}
